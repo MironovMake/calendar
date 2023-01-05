@@ -45,27 +45,56 @@ class TrakedStuff {
                 if (!this.days[j].includes(day)) {
                     this.days[j].push(day)
                     this.counter = this.counter + 1
-                }
-                document.getElementById(this.popUp).style.color = "red";
-                // saving day
-                var locStore
-                if (localStorage.getItem(this.result) === null) {
-                    locStore = [];
-                } else {
-                    locStore = JSON.parse(localStorage.getItem(this.result))
-                }
-                if (locStore.includes([currMonth, day])) {
-
-                } else {
+                    document.getElementById(this.popUp).style.color = "red";
+                    var locStore
+                    if (localStorage.getItem(this.result) === null) {
+                        locStore = [];
+                    } else {
+                        locStore = JSON.parse(localStorage.getItem(this.result))
+                    }
                     locStore.push([currMonth, day]);
+                    localStorage.setItem(this.result, JSON.stringify(locStore));
+                } else {
+                    var locStore
+                    locStore = JSON.parse(localStorage.getItem(this.result))
+                    var i = 0
+                    var localFlag = true
+                    locStore.forEach(oneElem => {
+                        if (oneElem != [currMonth, day] && localFlag) {
+                            i = i + 1;
+                            localFlag = false;
+                        }
+                    })
+                    i = i - 1
+
+                    if (i <= locStore.length) {
+                        var newLocStore = [];
+                        locStore.forEach(oneElem => {
+                            if (oneElem[0] != currMonth || oneElem[1] != day) {
+                                //  newLocStore.push(oneElem)
+                                newLocStore.push(oneElem)
+                            }
+
+                        })
+                        document.getElementById(this.popUp).style.color = "black";
+                        this.counter = this.counter - 1
+                        localStorage.setItem(this.result, JSON.stringify(newLocStore));
+                        newLocStore.forEach(oneElem => {
+                            this.days[oneElem[0]].push(oneElem[1]);
+                        })
+                        liTag += `<li> \&#xf02d<button type="button" id = ${day} class = "dayButton" onClick="date_was_cliked(this.id)"> \&#xf02d </button></li>`;
+
+                    }
+                    //}
                 }
-                localStorage.setItem(this.result, JSON.stringify(locStore));
+                // saving day
+
             }
         }
     }
 }
-let newNames = ["book", "ambulance", "dumbbell", "wine-bottle", "pizza-slice"]
-let newTags = ["\&#xf02d", "\&#xf0f9", "\&#xf44b", "\&#xf72f", "\&#xf818"]
+let newNames = ["ambulance", "dumbbell", "wine-bottle"]
+let newTags = ["\&#xf0f9", "\&#xf44b", "\&#xf72f"]
 var ine = 0;
 var allTracked = [];
 newNames.forEach(oneElem => {
@@ -73,25 +102,6 @@ newNames.forEach(oneElem => {
     ine = ine + 1
 })
 
-
-// var bookDays = new TrakedStuff("book", "\&#xf02d");
-// var sickDays = new TrakedStuff("ambulance", "\&#xf0f9");
-// var dumbbellDays = new TrakedStuff("dumbbell", "\&#xf44b");
-// var bottleDays = new TrakedStuff("wine-bottle", "\&#xf72f");
-// var pizza = new TrakedStuff("pizza-slice", "\&#xf818");
-// var allTracked = newAllTracked;// [bookDays, sickDays, bottleDays, dumbbellDays, pizza];
-function workWithLocalStorage(month, dayForSave, type) {
-    let days;
-    if (localStorage.getItem("monthWithDays") === null) {
-        days = [];
-    } else {
-        days = JSON.parse(localStorage.getItem("monthWithDays"))
-    }
-    days.push(dayForSave);
-    localStorage.setItem('savedDays', JSON.stringify(days));
-    localStorage.setItem('savedmonth', JSON.stringify(days));
-    localStorage.setItem('savedType', JSON.stringify(days));
-}
 
 function renderPopUp(elements) {
     var i = 0
@@ -147,6 +157,7 @@ const renderCalendar = () => {
             && currYear === new Date().getFullYear() ? "active" : "";
         let individualDay = "day" + parseInt(i)
         var datTag = ""
+        console.log("render calendar")
         allTracked.forEach(element => {
             if (element.days[currMonth].includes(individualDay)) {
                 datTag = datTag + element.tag
@@ -197,7 +208,6 @@ function date_was_cliked(clicked_id) {
     allTracked.forEach(element => {
         if (element.days[currMonth].includes(choosenDay)) {
             document.getElementById(element.popUp).style.color = "red";
-
         }
     });
 
@@ -212,6 +222,7 @@ function i_did_choice() {
         archive[i].style.color = "black";
     }
     flag = true
+
 }
 var flag = true;
 function archive_was_choosen(clicked_id) {
