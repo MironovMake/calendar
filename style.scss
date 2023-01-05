@@ -90,22 +90,30 @@ header .current-date{
 
 .dayButton{
   font-family: 'FontAwesome';
- // background: #d60000;
   position: absolute;
- // content: "";
   left: 50%;
   top: 50%;
   height: 40px;
   width: 40px;
   z-index: 0;
-  border-radius: 50%;
+  // border-radius: 50%;
   transform: translate(-50%, -50%); 
   cursor: pointer;
+}
+.dayButton:hover{
+  background-color: rgb(193, 190, 190);
 
 }
-
 .popUp{
   display: none;
+  background-color: rgb(249, 247, 247);
+  position: absolute;
+  z-index: 1;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.5rem;
+  border-color: #878787;
 }
 
 .fa-square-check{
@@ -114,7 +122,7 @@ header .current-date{
 .report{
   position: absolute;
   //transform: translate(-50%, -50%); 
-  left: 0%;
-  top: 0%;
+  left: 3rem;
+  top: 3rem;
 
 }
