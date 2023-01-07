@@ -29,6 +29,7 @@ body {
   border-radius: 10px;
   -webkit-box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
           box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  height: 495px;
 }
 
 .wrapper header {
@@ -119,12 +120,6 @@ header .current-date {
   background: #9B59B6;
 }
 
-.days li:not(.active):hover::before {
-  font-family: 'FontAwesome';
-  top: 22px;
-  content: "\f5ce";
-}
-
 .dayButton {
   font-family: 'FontAwesome';
   position: absolute;
@@ -132,7 +127,7 @@ header .current-date {
   top: 50%;
   height: 40px;
   width: 40px;
-  z-index: 0;
+  z-index: 1;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   cursor: pointer;
@@ -155,12 +150,34 @@ header .current-date {
 }
 
 .fa-square-check {
-  color: #36da36;
+  color: #2bc32b;
+  padding: 0.75rem;
 }
 
 .report {
   position: absolute;
   left: 3rem;
   top: 3rem;
+}
+
+.monthReport {
+  position: absolute;
+  left: 10rem;
+  top: 3rem;
+}
+
+.popUp .archive {
+  padding: 0.75rem;
+}
+
+.currentDay {
+  background-color: rgba(155, 89, 182, 0.4);
+}
+
+@media only screen and (max-width: 800px) {
+  /*   For mobile:*/
+  .report, .monthReport {
+    top: 0.1rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */
