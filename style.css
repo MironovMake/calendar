@@ -6,6 +6,11 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  color: #343030;
+}
+
+.current-date {
+  color: #343030;
 }
 
 body {
@@ -177,7 +182,7 @@ header .current-date {
 @media only screen and (max-width: 800px) {
   /*   For mobile:*/
   .report, .monthReport {
-    top: 0.1rem;
+    top: 5px;
   }
 }
 /*# sourceMappingURL=style.css.map */

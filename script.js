@@ -81,7 +81,10 @@ class TrakedStuff {
                         newLocStore.forEach(oneElem => {
                             this.days[oneElem[0]].push(oneElem[1]);
                         })
-                        liTag += `<li> \&#xf02d<button type="button" id = ${day} class = "dayButton" onClick="date_was_cliked(this.id)"> \&#xf02d </button></li>`;
+                        liTag += `<li> \&#xf02d<button type="button" 
+                        id = ${day} 
+                        class = "dayButton" 
+                        onClick="date_was_cliked(this.id)"> \&#xf02d </button></li>`;
                     }
                 }
             }
@@ -166,7 +169,6 @@ const renderCalendar = () => {
     if (firstDayofMonth > 6) {
         firstDayofMonth = firstDayofMonth - 7
     }
-
     for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
         liTag += `<li class="inactive">${lastDateofLastMonth - i + 1} </li>`;
     }
@@ -182,13 +184,21 @@ const renderCalendar = () => {
             }
         });
         var todayClass = ""
-        if (currentDay + 1 == i && currMonth === new Date().getMonth()) {
+        if (isToday) {
             todayClass = " currentDay"
         }
         if (datTag == "") {
-            liTag += `<li>&nbsp<button type="button" id = ${individualDay}  class = "dayButton${todayClass}" onClick="date_was_cliked(this.id)">${i} </button></li>`;
+            liTag += `<li>&nbsp<button type="button" 
+            id = ${individualDay}  
+            class = "dayButton${todayClass}" 
+            onClick="date_was_cliked(this.id)">${i} 
+            </button></li>`;
         } else {
-            liTag += `<li>&nbsp<button type="button" id = ${individualDay} class = "dayButton${todayClass}" onClick="date_was_cliked(this.id)">${datTag} </button></li>`;
+            liTag += `<li>&nbsp<button type="button" 
+            id = ${individualDay} 
+            class = "dayButton${todayClass}" 
+            onClick="date_was_cliked(this.id)">${datTag} 
+            </button></li>`;
         }
     }
     if (lastDayofMonth != 0) {
@@ -220,15 +230,18 @@ function date_was_cliked(clicked_id) {
         left: `${element.right + 10}px`,
         top: `${(element.top + element.bottom) / 2 - 22}px`,
     });
-
-
     formElements.style.display = "block";
 
     if (formElements.getBoundingClientRect().right > elementwrapper.right) {
         Object.assign(formElements.style, {
             left: `${element.right - 130}px`,
         });
+    }
 
+    if (formElements.getBoundingClientRect().bottom > elementwrapper.bottom) {
+        Object.assign(formElements.style, {
+            top: `${element.top - 185}px`,
+        });
     }
 
     choosenDay = clicked_id;

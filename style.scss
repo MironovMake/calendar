@@ -5,6 +5,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  color: #343030;
+} 
+.current-date{
+  color: #343030;
 }
 body{
   display: flex;
@@ -142,10 +146,11 @@ header .current-date{
 .currentDay{
   background-color: rgba(155, 89, 182,0.4);
 }
+
 @media only screen and (max-width: 800px) {
   /*   For mobile:*/
  
   .report,.monthReport{
-    top: 0.1rem;
+    top: 5px;
   }
   }
